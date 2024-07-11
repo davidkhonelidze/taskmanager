@@ -49,31 +49,6 @@ services:
             retries: 3
             timeout: 5s
 
-    mysql_redmine:
-        image: 'mysql/mysql-server:8.0'
-        ports:
-            - '${FORWARD_DB_PORT:-3307}:3307'
-        environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
-        volumes:
-            - 'sail-mysql:/var/lib/mysql_redmine'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
-        networks:
-            - sail
-        healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
-            retries: 3
-            timeout: 5s
-
     redis:
         image: 'redis:alpine'
         ports:
@@ -95,12 +70,12 @@ services:
         ports:
             - "3000:3000"
         environment:
-            REDMINE_DB_MYSQL: mysql_redmine
+            REDMINE_DB_MYSQL: mysql
             REDMINE_DB_DATABASE: '${DB_DATABASE}'
             REDMINE_DB_USERNAME: '${DB_USERNAME}'
             REDMINE_DB_PASSWORD: '${DB_PASSWORD}'
         depends_on:
-            - mysql_redmine
+            - mysql
         networks:
             - sail
 networks:
