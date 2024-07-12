@@ -1,5 +1,6 @@
 <script setup>
 import {Link} from "@inertiajs/vue3";
+import Header from "./Header.vue";
 
 const props = defineProps({
     title: String,
@@ -10,7 +11,7 @@ const props = defineProps({
 
 
     <div class="content">
-        <div>Header</div>
+        <Header></Header>
 
         <main class="container mx-auto max-w-[1280px] px-5">
             <slot></slot>
