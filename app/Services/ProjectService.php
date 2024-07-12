@@ -14,6 +14,8 @@ class ProjectService
 
     public function getProjects(ParameterBag $filters)
     {
-        return $this->projectRepository->getProjects($filters);
+        $projects = $this->projectRepository->getProjects($filters);
+
+        dd($projects);
     }
 }
