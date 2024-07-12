@@ -15,6 +15,6 @@ class ProjectService
     {
         $projects = $this->projectRepository->getProjects($filters);
 
-        dd($projects);
+        return $projects;
     }
 }

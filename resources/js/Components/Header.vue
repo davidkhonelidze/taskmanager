@@ -4,8 +4,7 @@ import {Link} from "@inertiajs/vue3";
 <template>
     <header class="bg-gray-50 px-5 sticky top-0 z-10 mb-6 border-b-2">
 
-        <div class="container mx-auto sm:px-5 max-w-[1280px] h-[110px] md:h-[66px] relative">
-
+        <div class="container mx-auto sm:px-5 max-w-[1280px] h-[110px] md:h-[66px] relative mb-5">
 
 
             <nav class="bg-white border-gray-200 dark:bg-gray-900">
@@ -26,7 +25,7 @@ import {Link} from "@inertiajs/vue3";
                     <div class="flex items-center">
                         <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
                             <li>
-                                <Link href="#" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</Link>
+                                <Link href="/" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</Link>
                             </li>
                             <li>
                                 <Link href="/projects" class="text-gray-900 dark:text-white hover:underline">Projects</Link>

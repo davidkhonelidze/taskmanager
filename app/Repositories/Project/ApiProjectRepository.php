@@ -21,6 +21,6 @@ class ApiProjectRepository implements ProjectRepositoryInterface
         $url = $this->url . '/' . 'projects.json';
         $response = Http::get($url);
 
-        return $response;
+        return $response->json();
     }
 }
