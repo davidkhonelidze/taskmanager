@@ -2,11 +2,13 @@
 
 namespace App\Repositories\Project;
 
+use Symfony\Component\HttpFoundation\ParameterBag;
+
 class DatabaseProjectRepository implements ProjectRepositoryInterface
 {
 
-    public function getProjects()
+    public function getProjects(ParameterBag $filters)
     {
-        // TODO: Implement getProjects() method.
+        dd('db');
     }
 }
