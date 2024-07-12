@@ -9,7 +9,6 @@ class ProjectService
 {
     public function __construct(private ProjectRepositoryInterface $projectRepository)
     {
-
     }
 
     public function getProjects(ParameterBag $filters)
