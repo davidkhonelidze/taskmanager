@@ -2,17 +2,31 @@
 
 namespace App\Repositories\Project;
 
-use App\Repositories\ApiRepository;
-use Illuminate\Support\Facades\Http;
+use App\Services\ApiService;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class ApiProjectRepository extends ApiRepository implements ProjectRepositoryInterface
+class ApiProjectRepository implements ProjectRepositoryInterface
 {
-    public function getProjects(ParameterBag $filters)
+    public function __construct(private ApiService $apiService)
     {
-        $url = $this->url . '/' . 'projects.json';
-        $response = Http::get($url);
+    }
 
-        return $response->json();
+    public function getProjects(ParameterBag $filters): LengthAwarePaginator
+    {
+        $data = $this->apiService->fetchData('projects.json', 'projects');
+
+        $transformedData = $this->apiService->transformData($data, function ($item) {
+            return [
+                'id' => $item['id'],
+                'name' => $item['name'],
+                'identifier' => $item['identifier'],
+                'description' => $item['description'],
+                'is_public' => $item['is_public'],
+                'updated_on' => $item['updated_on'],
+            ];
+        });
+
+        return $this->apiService->paginateData($transformedData, 10);
     }
 }

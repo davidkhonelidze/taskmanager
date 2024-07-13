@@ -2,11 +2,8 @@
 
 namespace App\Repositories\Issue;
 
-use App\Repositories\ApiRepository;
 use App\Services\ApiService;
-use App\Services\Interfaces\ApiServiceInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 class ApiIssueRepository implements IssueRepositoryInterface
