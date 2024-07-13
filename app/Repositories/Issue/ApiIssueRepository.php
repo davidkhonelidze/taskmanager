@@ -16,7 +16,7 @@ class ApiIssueRepository implements IssueRepositoryInterface
     {
         $data = $this->apiService->fetchData('issues.json', 'issues');
 
-        $transformedData = $this->apiService->transformData($data, function ($item) {
+        $transformedData = $this->apiService->transformData($data['data'], function ($item) {
             return [
                 'id' => $item['id'],
                 'project' => $item['project'],
@@ -28,6 +28,6 @@ class ApiIssueRepository implements IssueRepositoryInterface
             ];
         });
 
-        return $this->apiService->paginateData($transformedData, 10);
+        return $this->apiService->paginateData($transformedData, $data['total'], $data['per_page']);
     }
 }

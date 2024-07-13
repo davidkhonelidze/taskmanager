@@ -9,7 +9,7 @@ use App\Services\Interfaces\ApiServiceInterface;
 
 class ApiService implements ApiServiceInterface
 {
-    public function fetchData(string $endpoint, string $dataKey): Collection
+    public function fetchData(string $endpoint, string $dataKey): array
     {
         $url = config('api.url') . '/' . $endpoint;
 
@@ -17,7 +17,11 @@ class ApiService implements ApiServiceInterface
 
         if ($response->successful()) {
             $data = $response->json();
-            return collect($data[$dataKey]);
+            return [
+                'data' => collect($data[$dataKey]),
+                'total' => $data['total_count'],
+                'per_page' => $data['limit'],
+            ];
         }
 
         throw new \Exception('Failed to fetch data from ' . $endpoint);
@@ -28,10 +32,10 @@ class ApiService implements ApiServiceInterface
         return $data->map($callback);
     }
 
-    public function paginateData(Collection $data, int $perPage): LengthAwarePaginator
+    public function paginateData(Collection $data, int $total, int $perPage): LengthAwarePaginator
     {
         $page = request()->get('page', 1);
-        $total = $data->count();
+        //$total = $data->count();
 
         return new LengthAwarePaginator(
             $data->forPage($page, $perPage),

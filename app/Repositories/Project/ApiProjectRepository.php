@@ -16,7 +16,7 @@ class ApiProjectRepository implements ProjectRepositoryInterface
     {
         $data = $this->apiService->fetchData('projects.json', 'projects');
 
-        $transformedData = $this->apiService->transformData($data, function ($item) {
+        $transformedData = $this->apiService->transformData($data['data'], function ($item) {
             return [
                 'id' => $item['id'],
                 'name' => $item['name'],
@@ -27,6 +27,6 @@ class ApiProjectRepository implements ProjectRepositoryInterface
             ];
         });
 
-        return $this->apiService->paginateData($transformedData, 10);
+        return $this->apiService->paginateData($transformedData, $data['total'], $data['per_page']);
     }
 }
