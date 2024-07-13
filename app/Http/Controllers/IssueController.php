@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Issues\CreateRequest;
 use App\Http\Requests\Issues\ListRequest;
 use App\Http\Resources\IssuesResource;
 use App\Services\Interfaces\IssueServiceinterface;
@@ -27,5 +28,19 @@ class IssueController extends Controller
                 'title' => 'Issues',
             ]
         );
+    }
+
+    public function create()
+    {
+        return Inertia::render(
+            'Issues/Create',
+            [
+                'title' => 'Create new issue',
+            ]
+        );
+    }
+
+    public function store(CreateRequest $request)
+    {
     }
 }
