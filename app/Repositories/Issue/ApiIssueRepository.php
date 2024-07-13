@@ -3,6 +3,7 @@
 namespace App\Repositories\Issue;
 
 use App\Repositories\ApiRepository;
+use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
 class ApiIssueRepository extends ApiRepository implements IssueRepositoryInterface
@@ -10,6 +11,9 @@ class ApiIssueRepository extends ApiRepository implements IssueRepositoryInterfa
 
     public function getIssues(ParameterBag $filters)
     {
-        // TODO: Implement getIssues() method.
+        $url = $this->url . '/' . 'issues.json';
+        $response = Http::get($url);
+
+        return $response->json();
     }
 }
