@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Projects\ListRequest;
+use App\Http\Resources\ProjectsResource;
 use App\Services\Interfaces\ProjectServiceInterface;
 use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -21,7 +22,7 @@ class ProjectController extends Controller
         return Inertia::render(
             'Projects/List',
             [
-                'projects' => $projects,
+                'projects' => ProjectsResource::collection($projects),
                 'title' => 'Projects',
             ]
         );
