@@ -13,7 +13,8 @@ const props = defineProps({
         <PageTitle :title="props.title"></PageTitle>
 
         <div class="grid grid-cols-1 md:grid-cols-3 justify-between gap-2">
-            <Card v-for="project in props.projects"
+            <Card v-for="project in props.projects.data"
+                  :project="project"
                 class=""></Card>
         </div>
     </Layout>
