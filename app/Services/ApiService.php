@@ -24,11 +24,19 @@ class ApiService implements ApiServiceInterface
 
         if ($response->successful()) {
             $data = $response->json();
-            return [
+            $finalData = [
                 'data' => collect($data[$dataKey]),
-                'total' => $data['total_count'],
-                'per_page' => $data['limit'],
             ];
+
+            if (isset($data['total_count'])) {
+                $finalData['total'] = $data['total_count'];
+            }
+
+            if (isset($data['limit'])) {
+                $finalData['per_page'] = $data['limit'];
+            }
+
+            return $finalData;
         }
 
         throw new \Exception('Failed to fetch data from ' . $endpoint);

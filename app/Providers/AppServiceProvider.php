@@ -10,10 +10,15 @@ use App\Repositories\Issue\IssueRepositoryInterface;
 use App\Repositories\Project\ApiProjectRepository;
 use App\Repositories\Project\DatabaseProjectRepository;
 use App\Repositories\Project\ProjectRepositoryInterface;
+use App\Repositories\Tracker\ApiTrackerRepository;
+use App\Repositories\Tracker\DatabaseTrackerRepository;
+use App\Repositories\Tracker\TrackerRepositoryInterface;
 use App\Services\Interfaces\IssueServiceinterface;
 use App\Services\Interfaces\ProjectServiceInterface;
+use App\Services\Interfaces\TrackerServiceInterface;
 use App\Services\IssueService;
 use App\Services\ProjectService;
+use App\Services\TrackerService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,8 +36,13 @@ class AppServiceProvider extends ServiceProvider
                 ? DatabaseIssueRepository::class
                 : ApiIssueRepository::class);
 
+        $this->app->bind(TrackerRepositoryInterface::class, config('api.type') === 'database'
+            ? DatabaseTrackerRepository::class
+            : ApiTrackerRepository::class);
+
         $this->app->bind(ProjectServiceInterface::class, ProjectService::class);
         $this->app->bind(IssueServiceinterface::class, IssueService::class);
+        $this->app->bind(TrackerServiceInterface::class, TrackerService::class);
     }
 
     /**
