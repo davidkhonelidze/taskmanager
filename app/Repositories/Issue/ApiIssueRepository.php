@@ -3,21 +3,23 @@
 namespace App\Repositories\Issue;
 
 use App\Repositories\ApiRepository;
+use App\Services\ApiService;
+use App\Services\Interfaces\ApiServiceInterface;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class ApiIssueRepository extends ApiRepository implements IssueRepositoryInterface
+class ApiIssueRepository implements IssueRepositoryInterface
 {
-
-    public function getIssues(ParameterBag $filters)
+    public function __construct(private ApiService $apiService)
     {
-        $url = $this->url . '/' . 'issues.json';
-        $response = Http::get($url);
+    }
 
-        $data = $response->json();
+    public function getIssues(ParameterBag $filters): LengthAwarePaginator
+    {
+        $data = $this->apiService->fetchData('issues.json', 'issues');
 
-        $transformedData = collect($data['issues'])->map(function ($item) {
+        $transformedData = $this->apiService->transformData($data, function ($item) {
             return [
                 'id' => $item['id'],
                 'project' => $item['project'],
@@ -29,18 +31,6 @@ class ApiIssueRepository extends ApiRepository implements IssueRepositoryInterfa
             ];
         });
 
-        $page = request()->get('page', 1);
-        $perPage = 10;
-        $total = count($transformedData);
-
-        $paginatedData = new LengthAwarePaginator(
-            $transformedData->forPage($page, $perPage),
-            $total,
-            $perPage,
-            $page,
-            ['path' => request()->url(), 'query' => request()->query()]
-        );
-
-        return $paginatedData;
+        return $this->apiService->paginateData($transformedData, 10);
     }
 }

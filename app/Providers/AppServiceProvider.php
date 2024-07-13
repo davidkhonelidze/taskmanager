@@ -29,11 +29,9 @@ class AppServiceProvider extends ServiceProvider
                 : new ApiProjectRepository();
         });
 
-        $this->app->bind(IssueRepositoryInterface::class, function ($app) {
-            return config('api.type') === 'database'
-                ? new DatabaseIssueRepository()
-                : new ApiIssueRepository();
-        });
+        $this->app->bind(IssueRepositoryInterface::class, config('api.type') === 'database'
+                ? DatabaseIssueRepository::class
+                : ApiIssueRepository::class);
 
         $this->app->bind(ProjectServiceInterface::class, ProjectService::class);
         $this->app->bind(IssueServiceinterface::class, IssueService::class);
