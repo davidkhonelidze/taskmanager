@@ -9,9 +9,16 @@ use App\Services\Interfaces\ApiServiceInterface;
 
 class ApiService implements ApiServiceInterface
 {
-    public function fetchData(string $endpoint, string $dataKey): array
+    public function fetchData(string $endpoint, string $dataKey, ?array $args = null): array
     {
         $url = config('api.url') . '/' . $endpoint;
+
+        if (is_array($args)) {
+            $url .= '?';
+            foreach ($args as $k => $v) {
+                $url .= $k . '=' . $v;
+            }
+        }
 
         $response = Http::get($url);
 
