@@ -12,7 +12,7 @@ class IndexController extends Controller
         return Inertia::render(
             'Index/Index',
             [
-                'event' => '',
+                'title' => 'Home Page',
             ]
         );
     }
