@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Issues\ListRequest;
+use App\Http\Resources\IssuesResource;
 use App\Services\Interfaces\IssueServiceinterface;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -22,7 +23,7 @@ class IssueController extends Controller
         return Inertia::render(
             'Issues/List',
             [
-                'issues' => $issues,
+                'issues' => IssuesResource::collection($issues),
                 'title' => 'Issues',
             ]
         );
