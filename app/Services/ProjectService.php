@@ -3,9 +3,10 @@
 namespace App\Services;
 
 use App\Repositories\Project\ProjectRepositoryInterface;
+use App\Services\Interfaces\ProjectServiceInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 
-class ProjectService
+class ProjectService implements ProjectServiceInterface
 {
     public function __construct(private ProjectRepositoryInterface $projectRepository)
     {
