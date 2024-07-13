@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\Issue\ApiIssueRepository;
+use App\Repositories\Issue\DatabaseIssueRepository;
+use App\Repositories\Issue\IssueRepositoryInterface;
 use App\Repositories\Project\ApiProjectRepository;
 use App\Repositories\Project\DatabaseProjectRepository;
 use App\Repositories\Project\ProjectRepositoryInterface;
@@ -18,6 +21,12 @@ class AppServiceProvider extends ServiceProvider
             return config('api.type') === 'database'
                 ? new DatabaseProjectRepository()
                 : new ApiProjectRepository();
+        });
+
+        $this->app->bind(IssueRepositoryInterface::class, function ($app) {
+            return config('api.type') === 'database'
+                ? new DatabaseIssueRepository()
+                : new ApiIssueRepository();
         });
     }
 
