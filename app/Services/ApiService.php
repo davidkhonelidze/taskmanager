@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Services\Interfaces\ApiServiceInterface;
+use Symfony\Component\HttpFoundation\ParameterBag;
 
 class ApiService implements ApiServiceInterface
 {
@@ -59,5 +60,22 @@ class ApiService implements ApiServiceInterface
             $page,
             ['path' => request()->url(), 'query' => request()->query()]
         );
+    }
+
+    public function storeData(string $endpoint, ParameterBag $data, string $dataKey)
+    {
+        $url = config('api.url') . '/' . $endpoint;
+
+        $formData = [
+            $dataKey => $data->all(),
+        ];
+
+        $formData[$dataKey]['project_id'] = 1;
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'X-Redmine-API-Key' => config('api.key'),
+        ])->post($url, $formData);
+
+        $response->throw();
     }
 }

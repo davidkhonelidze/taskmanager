@@ -22,7 +22,11 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'tracker_id' => '',
+            'status_id' => '',
+            'priority_id' => '',
+            'subject' => '',
+            'description' => '',
         ];
     }
 }

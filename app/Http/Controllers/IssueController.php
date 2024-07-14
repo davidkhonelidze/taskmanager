@@ -59,5 +59,6 @@ class IssueController extends Controller
 
     public function store(CreateRequest $request)
     {
+        $this->issueService->store(new ParameterBag($request->validated()));
     }
 }

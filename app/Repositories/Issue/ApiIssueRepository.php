@@ -34,4 +34,9 @@ class ApiIssueRepository implements IssueRepositoryInterface
 
         return $this->apiService->paginateData($transformedData, $data['total'], $data['per_page']);
     }
+
+    public function store(ParameterBag $data)
+    {
+        $this->apiService->storeData('issues.json', $data, 'issue');
+    }
 }

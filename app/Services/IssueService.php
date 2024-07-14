@@ -16,4 +16,9 @@ class IssueService implements IssueServiceinterface
     {
         return $this->issueRepository->getIssues($filters);
     }
+
+    public function store(ParameterBag $data)
+    {
+        $this->issueRepository->store($data);
+    }
 }

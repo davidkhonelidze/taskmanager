@@ -11,4 +11,9 @@ class DatabaseIssueRepository implements IssueRepositoryInterface
     {
         // TODO: Implement getIssues() method.
     }
+
+    public function store(ParameterBag $data)
+    {
+        // TODO: Implement store() method.
+    }
 }
