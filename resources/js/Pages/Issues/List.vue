@@ -3,6 +3,7 @@ import Layout from "../../Components/Layout.vue";
 import PageTitle from "../../Components/PageTitle.vue";
 import Issues from "../../Components/Issues.vue";
 import {Link} from "@inertiajs/vue3";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
     issues: Object,
@@ -29,5 +30,11 @@ const props = defineProps({
         </div>
 
         <Issues :issues="props.issues"></Issues>
+
+        <div class="flex justify-end my-3">
+            <Pagination
+                :pagination="props.issues.meta"
+                :only="['issues']" />
+        </div>
     </Layout>
 </template>
