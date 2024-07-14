@@ -17,7 +17,7 @@ class ApiService implements ApiServiceInterface
         if (is_array($args)) {
             $url .= '?';
             foreach ($args as $k => $v) {
-                $url .= $k . '=' . $v;
+                $url .= $k . '=' . $v . '&';
             }
         }
 
@@ -51,10 +51,9 @@ class ApiService implements ApiServiceInterface
     public function paginateData(Collection $data, int $total, int $perPage): LengthAwarePaginator
     {
         $page = request()->get('page', 1);
-        //$total = $data->count();
 
         return new LengthAwarePaginator(
-            $data->forPage($page, $perPage),
+            $data, //$data->forPage($page, $perPage),
             $total,
             $perPage,
             $page,
@@ -77,5 +76,18 @@ class ApiService implements ApiServiceInterface
         ])->post($url, $formData);
 
         $response->throw();
+    }
+
+    public function getFormatListingFilters(ParameterBag $filters): array
+    {
+        $args = [
+            'limit' => config('api.per_page'),
+        ];
+
+        if ($filters->has('page')) {
+            $args['offset'] = $args['limit'] * ($filters->getInt('page') - 1);
+        }
+
+        return $args;
     }
 }

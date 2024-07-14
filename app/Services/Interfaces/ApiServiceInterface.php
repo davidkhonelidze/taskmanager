@@ -12,4 +12,5 @@ interface ApiServiceInterface
     public function transformData(Collection $data, callable $callback): Collection;
     public function paginateData(Collection $data, int $total, int $perPage): LengthAwarePaginator;
     public function storeData(string $endpoint, ParameterBag $data, string $dataKey);
+    public function getFormatListingFilters(ParameterBag $filters): array;
 }

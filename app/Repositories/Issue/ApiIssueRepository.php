@@ -14,9 +14,7 @@ class ApiIssueRepository implements IssueRepositoryInterface
 
     public function getIssues(ParameterBag $filters): LengthAwarePaginator
     {
-        $args = [
-            'limit' => 10,
-        ];
+        $args = $this->apiService->getFormatListingFilters($filters);
 
         $data = $this->apiService->fetchData('issues.json', 'issues', $args);
 

@@ -22,7 +22,7 @@ class ListRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'page' => 'integer|min:1',
         ];
     }
 }
