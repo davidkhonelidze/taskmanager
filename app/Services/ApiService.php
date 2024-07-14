@@ -90,4 +90,15 @@ class ApiService implements ApiServiceInterface
 
         return $args;
     }
+
+    public function deleteData(string $endpoint)
+    {
+        $url = config('api.url') . '/' . $endpoint;
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'X-Redmine-API-Key' => config('api.key'),
+        ])->delete($url);
+
+        $response->throw();
+    }
 }

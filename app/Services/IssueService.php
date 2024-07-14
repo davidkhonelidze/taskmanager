@@ -21,4 +21,9 @@ class IssueService implements IssueServiceinterface
     {
         $this->issueRepository->store($data);
     }
+
+    public function delete(int $id)
+    {
+        $this->issueRepository->delete($id);
+    }
 }

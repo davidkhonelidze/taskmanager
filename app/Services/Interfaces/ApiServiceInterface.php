@@ -13,4 +13,5 @@ interface ApiServiceInterface
     public function paginateData(Collection $data, int $total, int $perPage): LengthAwarePaginator;
     public function storeData(string $endpoint, ParameterBag $data, string $dataKey);
     public function getFormatListingFilters(ParameterBag $filters): array;
+    public function deleteData(string $endpoint);
 }

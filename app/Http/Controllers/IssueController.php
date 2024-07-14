@@ -63,4 +63,9 @@ class IssueController extends Controller
 
         return redirect()->route('issues.list')->with('success', 'Issue created successfully!');
     }
+
+    public function delete($id)
+    {
+        $this->issueService->delete($id);
+    }
 }

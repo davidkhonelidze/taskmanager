@@ -37,4 +37,10 @@ class ApiIssueRepository implements IssueRepositoryInterface
     {
         $this->apiService->storeData('issues.json', $data, 'issue');
     }
+
+    public function delete(int $id)
+    {
+        $endpoint = '/issues/' . $id . '.json';
+        $this->apiService->deleteData($endpoint);
+    }
 }

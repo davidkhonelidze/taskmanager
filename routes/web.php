@@ -10,3 +10,4 @@ Route::get('/projects', [ProjectController::class, 'index'])->name('projects.lis
 Route::get('/issues', [IssueController::class, 'index'])->name('issues.list');
 Route::get('/issues/create', [IssueController::class, 'create'])->name('issues.create');
 Route::post('/issues', [IssueController::class, 'store'])->name('issues.store');
+Route::delete('/issues/{id}', [IssueController::class, 'delete'])->name('issues.delete');

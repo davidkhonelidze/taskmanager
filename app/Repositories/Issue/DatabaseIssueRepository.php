@@ -16,4 +16,9 @@ class DatabaseIssueRepository implements IssueRepositoryInterface
     {
         // TODO: Implement store() method.
     }
+
+    public function delete(int $id)
+    {
+        // TODO: Implement delete() method.
+    }
 }
