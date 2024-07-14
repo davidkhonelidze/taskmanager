@@ -22,11 +22,12 @@ return new class extends Migration
             $table->integer('status');
             $table->integer('ltf')->nullable();
             $table->integer('rgt')->nullable();
-            $table->integer('inherit_numbers');
+            $table->integer('inherit_members');
             $table->integer('default_version_id')->nullable();
             $table->integer('default_assigned_to_id')->nullable();
             $table->integer('default_issue_query_id')->nullable();
-            $table->timestamps();
+            $table->timestamp('created_on')->nullable();
+            $table->timestamp('updated_on')->nullable();
         });
     }
 
