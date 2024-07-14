@@ -6,6 +6,7 @@ const props = defineProps({
     title: String,
     trackers: Object,
     issueStatuses: Object,
+    issuePriorities: Object,
 })
 </script>
 <template>
@@ -21,8 +22,8 @@ const props = defineProps({
             </div>
 
             <div class="mb-5">
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">Tracker</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <label for="tracker" class="block mb-2 text-sm font-medium text-gray-900 ">Tracker</label>
+                <select id="tracker" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option v-for="t in props.trackers.data" :value="t.id">{{t.name}}</option>
                 </select>
             </div>
@@ -33,26 +34,21 @@ const props = defineProps({
             </div>
 
             <div class="mb-5">
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                <label for="status" class="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
+                <select id="status" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                     <option v-for="status in props.issueStatuses.data" :value="status.id">{{status.name}}</option>
                 </select>
             </div>
 
             <div class="mb-5">
-                <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 ">Priority</label>
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>France</option>
-                    <option>Germany</option>
+                <label for="priority" class="block mb-2 text-sm font-medium text-gray-900 ">Priority</label>
+                <select id="priority" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <option v-for="priority in props.issuePriorities.data" :value="priority.id">{{priority.name}}</option>
                 </select>
             </div>
 
             <div class="mb-5">
                 <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Create</button>
-
             </div>
         </form>
 

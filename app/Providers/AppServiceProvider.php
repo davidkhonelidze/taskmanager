@@ -7,6 +7,9 @@ use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Issue\ApiIssueRepository;
 use App\Repositories\Issue\DatabaseIssueRepository;
 use App\Repositories\Issue\IssueRepositoryInterface;
+use App\Repositories\IssuePriority\ApiissuePriorityrepository;
+use App\Repositories\IssuePriority\DatabaseIssuePriorityRepository;
+use App\Repositories\IssuePriority\IssuePriorityRepositoryInterface;
 use App\Repositories\IssueStatus\ApiIssueStatusRepository;
 use App\Repositories\IssueStatus\DatabaseIssueStatusRepository;
 use App\Repositories\IssueStatus\IssueStatusRepositoryInterface;
@@ -16,10 +19,12 @@ use App\Repositories\Project\ProjectRepositoryInterface;
 use App\Repositories\Tracker\ApiTrackerRepository;
 use App\Repositories\Tracker\DatabaseTrackerRepository;
 use App\Repositories\Tracker\TrackerRepositoryInterface;
+use App\Services\Interfaces\IssuePriorityServiceinterface;
 use App\Services\Interfaces\IssueServiceinterface;
 use App\Services\Interfaces\IssueStatusServiceInterface;
 use App\Services\Interfaces\ProjectServiceInterface;
 use App\Services\Interfaces\TrackerServiceInterface;
+use App\Services\IssuePriorityService;
 use App\Services\IssueService;
 use App\Services\IssueStatusService;
 use App\Services\ProjectService;
@@ -49,10 +54,15 @@ class AppServiceProvider extends ServiceProvider
             ? DatabaseIssueStatusRepository::class
             : ApiIssueStatusRepository::class);
 
+        $this->app->bind(IssuePriorityRepositoryInterface::class, config('api.type') === 'database'
+            ? DatabaseIssuePriorityRepository::class
+            : ApiissuePriorityrepository::class);
+
         $this->app->bind(ProjectServiceInterface::class, ProjectService::class);
         $this->app->bind(IssueServiceinterface::class, IssueService::class);
         $this->app->bind(TrackerServiceInterface::class, TrackerService::class);
         $this->app->bind(IssueStatusServiceInterface::class, IssueStatusService::class);
+        $this->app->bind(IssuePriorityServiceinterface::class, IssuePriorityService::class);
     }
 
     /**
