@@ -2,6 +2,10 @@
 
 namespace App\Repositories\IssueStatus;
 
-class DatabaseIssueStatusRepository
+class DatabaseIssueStatusRepository implements IssueStatusRepositoryInterface
 {
+    public function getIssueStatuses()
+    {
+        // TODO: Implement getIssueStatuses() method.
+    }
 }
