@@ -67,7 +67,7 @@ const filter = (event) => {
                 </select>
             </div>
 
-            <div class="min-w-20 ml-auto">
+            <div class="min-w-full sm:min-w-20 ml-auto">
                 <Link href="/issues/create">
                     <button
                         type="button"
