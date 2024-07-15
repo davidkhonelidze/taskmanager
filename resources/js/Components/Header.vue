@@ -30,9 +30,6 @@ import {Link} from "@inertiajs/vue3";
                             <li>
                                 <Link href="/issues" class="text-gray-900 dark:text-white hover:underline">Issues</Link>
                             </li>
-                            <li>
-                                <a href="#" class="text-gray-900 dark:text-white hover:underline">Settings</a>
-                            </li>
                         </ul>
                     </div>
                 </div>
