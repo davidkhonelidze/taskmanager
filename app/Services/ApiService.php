@@ -84,8 +84,18 @@ class ApiService implements ApiServiceInterface
             'limit' => config('api.per_page'),
         ];
 
-        if ($filters->has('page')) {
-            $args['offset'] = $args['limit'] * ($filters->getInt('page') - 1);
+        foreach ($filters->all() as $k => $v) {
+            switch ($k) {
+                case 'page':
+                    $args['offset'] = $args['limit'] * ($filters->getInt('page') - 1);
+                    break;
+
+                case 'status_id':
+                case 'tracker_id':
+                case 'priority_id':
+                    $args[$k] = $v;
+                    break;
+            }
         }
 
         return $args;
