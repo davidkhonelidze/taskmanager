@@ -23,6 +23,6 @@ class DatabaseIssueRepository implements IssueRepositoryInterface
 
     public function delete(int $id)
     {
-        // TODO: Implement delete() method.
+        Issue::where('id', $id)->delete();
     }
 }
