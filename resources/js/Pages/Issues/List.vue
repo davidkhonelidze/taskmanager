@@ -43,11 +43,17 @@ const deleteIssue = () => {
             </div>
         </div>
 
+        <div
+            class="flex justify-center items-center font-bold text-red-500"
+            v-if="!props.issues.data.length">No issues yet.</div>
+
         <Issues
+            v-if="props.issues.data.length"
             :deleteIssue="clickDeleteIsssue"
             :issues="props.issues"></Issues>
 
-        <div class="flex justify-end my-3">
+        <div class="flex justify-end my-3"
+            v-if="props.issues.data.length">
             <Pagination
                 :pagination="props.issues.meta"
                 :only="['issues']" />
