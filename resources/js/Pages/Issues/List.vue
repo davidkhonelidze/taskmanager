@@ -4,11 +4,13 @@ import PageTitle from "../../Components/PageTitle.vue";
 import Issues from "../../Components/Issues.vue";
 import {Link, router} from "@inertiajs/vue3";
 import Pagination from "../../Components/Pagination.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 const props = defineProps({
     issues: Object,
     title: String,
+    filters: Object,
+    query: Object,
 })
 
 const deleteIssueDialog = ref(false)
@@ -21,6 +23,30 @@ const clickDeleteIsssue = (id) => {
 const deleteIssue = () => {
     router.delete('/issues/' + deleteIssueId.value)
 }
+
+const form = {
+
+}
+
+onMounted(() => {
+    for(let k in props.query) {
+        form[k] = props.query[k];
+    }
+})
+
+const filter = (event) => {
+    // on filter change add value to existing filters array
+    if (event.target.value !== '') {
+        form[event.target.name + '_id'] = event.target.value;
+    } else {
+        // if filter deselected remove from form
+        if (form.hasOwnProperty(event.target.name + '_id')) {
+            delete form['status_id'];
+            console.log(form)
+        }
+    }
+    router.get('', form,{ preserveState: true, replace: true })
+}
 </script>
 <template>
     <Layout>
@@ -28,9 +54,16 @@ const deleteIssue = () => {
 
 
         <div class="flex mb-5">
-            <div class="min-w-20">
-                <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                    <option value="t">filter</option>
+            <div class="min-w-20 mr-2"
+                v-for="(item, index) in props.filters">
+                <select :id="index"
+                        :name="index"
+                        @change="filter"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <option value="">{{index}}</option>
+                    <option
+                        v-for="(val, i) in item.data"
+                        :value="val.id">{{val.name}}</option>
                 </select>
             </div>
 

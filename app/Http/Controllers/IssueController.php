@@ -31,11 +31,21 @@ class IssueController extends Controller
         $filters = new ParameterBag($request->validated());
         $issues = $this->issueService->getIssues($filters);
 
+        $trackers = $this->trackerService->getTrackers();
+        $issueStatuses = $this->issueStatusService->getIssueStatuses();
+        $issuePriorities = $this->issuePriorityService->getIssuePriorities();
+
         return Inertia::render(
             'Issues/List',
             [
-                'issues' => IssuesResource::collection($issues),
+                'issues' => IssuesResource::collection($issues->withQueryString()),
                 'title' => 'Issues',
+                'filters' => [
+                    'tracker' => TrackersResource::collection($trackers),
+                    'status' => IssueStatusesResource::collection($issueStatuses),
+                    'priority' => IssuePrioritiesResource::collection($issuePriorities),
+                ],
+                'query' => $filters,
             ]
         );
     }
