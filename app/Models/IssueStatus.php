@@ -11,7 +11,7 @@ class IssueStatus extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'issue_statueses';
+    protected $table = 'issue_statuses';
 
     protected $fillable = [
         'name',

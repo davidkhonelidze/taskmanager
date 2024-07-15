@@ -12,7 +12,6 @@ class DatabaseProjectRepository implements ProjectRepositoryInterface
     {
         $query = Project::query();
 
-        //$query->take(config('api.per_page'));
         $query->orderBy('id', 'desc');
         return $query->paginate(config('api.per_page'));
     }

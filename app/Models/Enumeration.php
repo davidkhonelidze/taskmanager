@@ -11,7 +11,7 @@ class Enumeration extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $table = 'enumeration';
+    protected $table = 'enumerations';
 
     protected $fillable = [
         'name',
