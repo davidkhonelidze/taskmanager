@@ -10,7 +10,7 @@ class DatabaseIssueRepository implements IssueRepositoryInterface
 
     public function getIssues(ParameterBag $filters)
     {
-        $query = Issue::query();
+        $query = Issue::with(['status', 'priority', 'tracker']);
 
         $query->orderBy('id', 'desc');
         return $query->paginate(config('api.per_page'));

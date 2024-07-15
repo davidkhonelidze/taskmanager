@@ -21,4 +21,19 @@ class Issue extends Model
         'subject',
         'description',
     ];
+
+    public function tracker()
+    {
+        return $this->hasOne(Tracker::class, 'id', 'tracker_id');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(IssueStatus::class, 'id', 'status_id');
+    }
+
+    public function priority()
+    {
+        return $this->hasOne(Enumeration::class, 'id', 'priority_id');
+    }
 }

@@ -19,6 +19,10 @@ class IssueService implements IssueServiceinterface
 
     public function store(ParameterBag $data)
     {
+        // there is no project search option in redmine api
+        // use id 1 as default
+        $data->set('project_id', 1);
+
         $this->issueRepository->store($data);
     }
 
