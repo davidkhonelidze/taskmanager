@@ -29,4 +29,11 @@ class ApiProjectRepository implements ProjectRepositoryInterface
 
         return $this->apiService->paginateData($transformedData, $data['total'], $data['per_page']);
     }
+
+    public function show(int $id)
+    {
+        $data = $this->apiService->fetchData('projects/' . $id . '.json', 'project');
+
+        return $data;
+    }
 }

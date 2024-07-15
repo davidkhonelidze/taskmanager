@@ -18,4 +18,9 @@ class ProjectService implements ProjectServiceInterface
 
         return $projects;
     }
+
+    public function show(int $id)
+    {
+        return $this->projectRepository->show($id);
+    }
 }

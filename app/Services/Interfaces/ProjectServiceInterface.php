@@ -7,4 +7,5 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 interface ProjectServiceInterface
 {
     public function getProjects(ParameterBag $filters);
+    public function show(int $id);
 }
