@@ -18,7 +18,7 @@ class DatabaseIssueRepository implements IssueRepositoryInterface
 
     public function store(ParameterBag $data)
     {
-        // TODO: Implement store() method.
+        Issue::create($data->all());
     }
 
     public function delete(int $id)
