@@ -10,6 +10,7 @@ This project is built using Laravel with Inertia.js and Vue for the frontend, an
 - Inertia.js
 - Vue.js
 - MySQL
+- Tailwind CSS
 
 ## Prerequisites
 
@@ -91,7 +92,7 @@ http://localhost:3000
     API_KEY=your_redmine_api_key
     ```
 
-3. Create general data (projects, issues, statuses) in Redmine.
+3. Create general data (projects, issues, statuses, trackers) in Redmine.
 
 4. Clear the application configuration cache:
     ```bash
